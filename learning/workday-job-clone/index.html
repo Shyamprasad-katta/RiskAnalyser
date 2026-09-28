@@ -60,11 +60,22 @@
 
   footer { text-align: center; font-size: 12px; color: var(--muted); padding: 24px 16px 40px; }
 
-  /* Apply modal */
-  dialog { border: 0; border-radius: 8px; padding: 24px; max-width: 420px; width: calc(100% - 32px); }
-  dialog::backdrop { background: rgba(0,0,0,.4); }
-  dialog h2 { margin-top: 0; font-size: 20px; }
-  dialog .opt { display: block; width: 100%; margin: 8px 0; text-align: center; }
+  /* Apply modal (Workday "Start Your Application") */
+  .btn-primary { border-radius: 999px; background: #0b2e6b; border-color: #0b2e6b; padding: 12px 36px; }
+  .btn-primary:hover { background: #082252; }
+  dialog { border: 0; border-radius: 0; padding: 48px 40px 120px; max-width: 552px; width: calc(100% - 32px); position: relative; box-shadow: 0 4px 24px rgba(0,0,0,.25); }
+  dialog::backdrop { background: rgba(0,0,0,.6); }
+  dialog h2 { margin: 0 0 20px; font-size: 24px; font-weight: 700; color: #333; }
+  dialog .job { margin: 0 0 24px; font-size: 19px; color: #333; }
+  dialog .close { position: absolute; top: 6px; right: 6px; width: 42px; height: 42px; border-radius: 50%; border: 2px solid #1450a0; background: #fff; color: #333; font-size: 26px; line-height: 1; cursor: pointer; display: grid; place-items: center; }
+  dialog .close:hover { background: #eef3fb; }
+  dialog .opt { display: block; width: 100%; margin: 0 0 22px; padding: 13px 16px; border-radius: 999px; font-size: 17px; font-weight: 700; text-align: center; cursor: pointer; border: 2px solid #1450a0; }
+  dialog .opt.fill { background: #1450a0; color: #fff; }
+  dialog .opt.fill:hover { background: #0f3f80; }
+  dialog .opt.outline { background: #fff; color: #1450a0; }
+  dialog .opt.outline:hover { background: #eef3fb; }
+  dialog hr { border: 0; border-top: 1px solid var(--border); margin: 0 -20px 20px; }
+  dialog hr.end { margin-top: 0; }
 </style>
 </head>
 <body>
@@ -146,17 +157,23 @@
 
 <footer>© 2026 Acme Motors (fictional) · Learning exercise · Layout inspired by Workday career sites</footer>
 
-<dialog id="applyDialog">
-  <h2>Start Your Application</h2>
-  <button class="btn btn-primary opt">Autofill with Resume</button>
-  <button class="btn btn-secondary opt">Apply Manually</button>
-  <button class="btn btn-secondary opt">Use My Last Application</button>
-  <form method="dialog"><button class="btn btn-secondary opt">Cancel</button></form>
+<dialog id="applyDialog" aria-labelledby="applyTitle">
+  <form method="dialog"><button class="close" aria-label="Close">&times;</button></form>
+  <h2 id="applyTitle">Start Your Application</h2>
+  <p class="job">Senior Software Engineer &ndash; Go (Golang)</p>
+  <button class="opt fill" data-href="#autofillWithResume">Autofill with Resume</button>
+  <button class="opt fill" data-href="#applyManually">Apply Manually</button>
+  <hr>
+  <button class="opt outline" data-href="#useMyLastApplication">Use My Last Application</button>
+  <hr class="end">
 </dialog>
 
 <script>
   const dlg = document.getElementById('applyDialog');
   document.getElementById('applyBtn').addEventListener('click', () => dlg.showModal());
+  // Close when clicking the dark backdrop, like Workday.
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  dlg.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => { location.hash = b.dataset.href; dlg.close(); }));
   const save = document.getElementById('saveBtn');
   save.addEventListener('click', () => { save.textContent = save.textContent === 'Save' ? 'Saved ✓' : 'Save'; });
 </script>
