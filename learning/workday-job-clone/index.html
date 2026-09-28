@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Senior Software Engineer - Go (Golang) | Acme Motors Careers</title>
+<!--
+  Learning exercise: a recreation of a Workday-style job posting layout.
+  The company, logo, and job text are fictional placeholders on purpose;
+  this is not a real posting and should not be published as one.
+-->
+<style>
+  :root {
+    --blue: #0875e1; --blue-dark: #005cb9; --text: #333; --muted: #5e6a75;
+    --border: #e1e4e8; --bg: #f6f7f8; --white: #fff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", Arial, sans-serif; color: var(--text); background: var(--bg); line-height: 1.5; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Header */
+  header { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+  .header-inner { max-width: 1200px; margin: 0 auto; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text); }
+  .logo-mark { width: 36px; height: 36px; border-radius: 6px; background: var(--blue); color: #fff; display: grid; place-items: center; font-size: 16px; }
+  .header-actions { display: flex; gap: 16px; align-items: center; font-size: 14px; }
+  .header-actions button { background: none; border: 0; color: var(--text); cursor: pointer; font: inherit; }
+
+  /* Hero banner */
+  .banner { height: 160px; background: linear-gradient(120deg, #0b2a4a, #0875e1); }
+
+  /* Layout */
+  main { max-width: 1200px; margin: -60px auto 40px; padding: 0 16px; display: grid; grid-template-columns: 1fr 320px; gap: 24px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  .card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+
+  .back { font-size: 14px; display: inline-block; margin-bottom: 12px; }
+  h1 { font-size: 28px; margin: 0 0 16px; line-height: 1.25; }
+  .apply-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  .btn { border-radius: 4px; padding: 10px 24px; font-weight: 600; font-size: 14px; cursor: pointer; border: 1px solid var(--blue); }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-primary:hover { background: var(--blue-dark); }
+  .btn-secondary { background: #fff; color: var(--blue); }
+
+  dl.meta { display: grid; grid-template-columns: 24px 1fr; gap: 10px 8px; margin: 0 0 24px; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); font-size: 14px; }
+  dl.meta dt { color: var(--muted); }
+  dl.meta dd { margin: 0; }
+  dl.meta dd span { display: block; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+
+  .description h2 { font-size: 18px; margin: 24px 0 8px; }
+  .description ul { padding-left: 20px; }
+  .description li { margin-bottom: 4px; }
+
+  aside h3 { font-size: 16px; margin: 0 0 12px; }
+  .similar { list-style: none; margin: 0; padding: 0; }
+  .similar li { padding: 12px 0; border-top: 1px solid var(--border); }
+  .similar li:first-child { border-top: 0; }
+  .similar small { display: block; color: var(--muted); }
+
+  footer { text-align: center; font-size: 12px; color: var(--muted); padding: 24px 16px 40px; }
+
+  /* Apply modal */
+  dialog { border: 0; border-radius: 8px; padding: 24px; max-width: 420px; width: calc(100% - 32px); }
+  dialog::backdrop { background: rgba(0,0,0,.4); }
+  dialog h2 { margin-top: 0; font-size: 20px; }
+  dialog .opt { display: block; width: 100%; margin: 8px 0; text-align: center; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#"><span class="logo-mark">AM</span>Acme Motors</a>
+    <div class="header-actions">
+      <button>🔍 Search for Jobs</button>
+      <button>Sign In</button>
+    </div>
+  </div>
+</header>
+
+<div class="banner" role="presentation"></div>
+
+<main>
+  <section class="card">
+    <a class="back" href="#">← Back to Job Search</a>
+    <h1>Senior Software Engineer - Go (Golang)</h1>
+
+    <div class="apply-row">
+      <button class="btn btn-primary" id="applyBtn">Apply</button>
+      <button class="btn btn-secondary" id="saveBtn">Save</button>
+    </div>
+
+    <dl class="meta">
+      <dt>📍</dt><dd><span>Locations</span>Remote - Canada · Markham, ON</dd>
+      <dt>🕒</dt><dd><span>Time type</span>Full time</dd>
+      <dt>📅</dt><dd><span>Posted on</span>Posted 2 Days Ago</dd>
+      <dt>🆔</dt><dd><span>Job requisition id</span>JR-000000</dd>
+    </dl>
+
+    <article class="description">
+      <p><strong>Work Arrangement:</strong> Hybrid</p>
+
+      <h2>The Role</h2>
+      <p>We are looking for a Senior Software Engineer to design and build backend services in Go that power our connected-vehicle platform. You will own services end to end, from API design through production operations.</p>
+
+      <h2>What You'll Do</h2>
+      <ul>
+        <li>Design, build, and maintain high-throughput microservices in Go</li>
+        <li>Define gRPC and REST APIs used by internal and partner teams</li>
+        <li>Improve reliability with observability, testing, and on-call ownership</li>
+        <li>Mentor engineers and lead design reviews</li>
+      </ul>
+
+      <h2>Your Skills &amp; Abilities (Required Qualifications)</h2>
+      <ul>
+        <li>5+ years of professional software development experience</li>
+        <li>3+ years building production services in Go</li>
+        <li>Experience with Kubernetes, containers, and a major cloud provider</li>
+        <li>Solid understanding of SQL/NoSQL datastores and messaging (Kafka or similar)</li>
+      </ul>
+
+      <h2>What Will Give You a Competitive Edge (Preferred Qualifications)</h2>
+      <ul>
+        <li>Automotive, IoT, or telematics domain experience</li>
+        <li>Experience with Terraform and CI/CD pipelines</li>
+        <li>Bachelor's degree in Computer Science or equivalent experience</li>
+      </ul>
+
+      <h2>Benefits</h2>
+      <p>Competitive compensation, health coverage, retirement savings plan, paid time off, and learning budget. (Placeholder text.)</p>
+    </article>
+  </section>
+
+  <aside>
+    <div class="card">
+      <h3>Similar Jobs (3)</h3>
+      <ul class="similar">
+        <li><a href="#">Software Engineer - Backend</a><small>Markham, ON · Posted 5 Days Ago</small></li>
+        <li><a href="#">Staff Engineer - Platform</a><small>Remote - Canada · Posted 30+ Days Ago</small></li>
+        <li><a href="#">Site Reliability Engineer</a><small>Oshawa, ON · Posted Yesterday</small></li>
+      </ul>
+    </div>
+  </aside>
+</main>
+
+<footer>© 2026 Acme Motors (fictional) · Learning exercise · Layout inspired by Workday career sites</footer>
+
+<dialog id="applyDialog">
+  <h2>Start Your Application</h2>
+  <button class="btn btn-primary opt">Autofill with Resume</button>
+  <button class="btn btn-secondary opt">Apply Manually</button>
+  <button class="btn btn-secondary opt">Use My Last Application</button>
+  <form method="dialog"><button class="btn btn-secondary opt">Cancel</button></form>
+</dialog>
+
+<script>
+  const dlg = document.getElementById('applyDialog');
+  document.getElementById('applyBtn').addEventListener('click', () => dlg.showModal());
+  const save = document.getElementById('saveBtn');
+  save.addEventListener('click', () => { save.textContent = save.textContent === 'Save' ? 'Saved ✓' : 'Save'; });
+</script>
+</body>
+</html>
